@@ -12,3 +12,4 @@ public class testController {
 		return "test/test";
 	}
 }
+
