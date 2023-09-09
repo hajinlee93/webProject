@@ -1,0 +1,38 @@
+@charset "UTF-8";
+:root {
+    --font-family-defailt: 'NotoSans Regular';
+    --font-family-primary: 'Koverwatch'; /* guide: coding with "font-style: italic;" */
+    --font-family-second: 'BlackFit77';
+    --point-color: #ef6313;
+    --point-color-2: #082963;
+    --point-color-2-light: #8394b1;
+    --point-color-3: #183a60;
+    --premium-color: #daab1d;
+    --premium-badge-color: #daab1e;
+    --header-color: #333e48;
+    --title-color: #162c4b;
+    --subtitle-color: #333e48;
+    --desc-color: #aaaaaa;
+    --snow-color: black;
+    --snow-igr-color: #f5e097;
+    --bg-color: #ebf5ff;
+    --bg-color-reward: #cee7ff;
+    --bg-reward: linear-gradient(to top, #9806007a, #00000080);
+    --bg-premium: linear-gradient(to top right, #162c4b7a, #00000080, #162c4b7a);
+    --text-shadow: 0px 2px 7px rgb(0 0 0 / 100%);
+    --text-desc-shadow: 0px 1px 2px rgb(0 0 0 / 50%);
+}
+
+@font-face {
+    font-family: Koverwatch;
+    font-weight: normal;
+    src: url("/static/fonts/Koverwatch.eot");
+    src: local("Koverwatch"), url("/resources/fonts/Koverwatch.woff") format("woff");
+}
+
+@font-face {
+    font-family: BlackFit77;
+    font-weight: normal;
+    src: url("/static/fonts/yoonblackfit77.eot");
+    src: local("yoonblackfit77"), url("/static/fonts/yoonblackfit77.woff") format("woff");
+}

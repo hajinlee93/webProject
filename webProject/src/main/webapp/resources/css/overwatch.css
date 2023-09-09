@@ -1,0 +1,643 @@
+@charset "UTF-8";
+
+@import url('variable.css');
+@import url('button.css');
+@import url('modal.css');
+@import url('../animation/snow-1.css');
+@import url('../animation/snow-2.css');
+
+:root {
+	--border-radius: 10px;
+	--rolling-banner-height: 220px;
+}
+
+body { width: 100%; background-color: var(--bg-color); font-size: 16px; line-height: 1.4; font-family: var(--font-family-defailt); color: #2e2e2e; word-break: keep-all; -webkit-text-size-adjust: none; max-height: 999999px; }
+#wrapper { max-width: var(--pc-max-width); min-height: auto; margin: auto; }
+
+.captcha .captcha-image { width: 200px; height: 70px; border: 1px solid #d3bb8d; vertical-align: top; }
+.captcha .refresh { display: inline-block; width: 40px; color: var(--point-color-3); text-align: center; vertical-align: top; cursor: pointer; }
+.captcha .captcha-input { width: 200px; height: 45px; line-height: 45px; text-align: center; font-family: var(--font-family-defailt); vertical-align: top; }
+.captcha .captcha-input::-webkit-input-placeholder { font-size: 1rem; color: #aaa; }
+
+#animation-snow-1, #animation-snow-2 { position: absolute; top: 70px; height: calc(100% - 100px); width: calc((100% - var(--content-width))/2 - 10px); overflow: hidden; filter: drop-shadow(0 0 10px white); }
+#animation-snow-1 { left: 0; }
+#animation-snow-2 { right: 0; }
+
+/* Layout */
+#main-header { height: 600px; width: 100%; margin: auto; padding-top: 40px; }
+#main-header .inner-header { position: relative; width: var(--content-width); height: 100%; margin: auto; }
+#main-header .header-visual { position: relative; height: 1200px; color: #fff; }
+#main-header .header-visual .background-outer { position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; }
+#main-header .header-visual .background { width: 100%; max-width: 2200px; position: relative; margin: auto; height: 100%; background-position: center top; background-repeat: no-repeat; background-size: auto; }
+/* background blur */
+/*#main-header .header-visual .background-outer:after { content: ''; position: absolute; left: 0px; bottom: 0px; width: 100%; height: 0px; box-shadow: 0px 0 80px 120px var(--bg-color); }*/
+/*#main-header .header-visual .background:before,*/
+/*#main-header .header-visual .background:after { content: " "; height: 100%; position: absolute; top: 0; box-shadow: 0px 0px 50px 160px var(--bg-color); }*/
+/*#main-header .header-visual .background:before { left: -20px; }*/
+/*#main-header .header-visual .background:after { right: -20px; }*/
+#main-header .header-visual .inner-header { display: table; height: 700px; }
+#main-header .header-visual .vertical-centered { text-align: center; vertical-align: middle; color: var(--title-color); }
+#main-header .header-visual .vertical-centered.bgimage-white { color: #bf4b04; text-shadow: 0px 0px 2px rgb(250 233 213); }
+#main-header .header-visual .vertical-centered .logo { background: url("/static/images/overwatch/logo.png") center no-repeat; width: 200px; height: 100px; background-size: contain; margin: 60px auto 30px auto; }
+#main-header .header-visual .vertical-centered .title { font-family: var(--font-family-primary); font-size: 77px; font-weight: normal; font-style: italic; line-height: 1.15; letter-spacing: -0.025em; margin: 8px 0px; }
+#main-header .header-visual .vertical-centered .sub-title { font-family: "NotoSans Bold"; font-size: var(--font-size-medium); color: var(--point-color); }
+#main-header .header-visual .vertical-centered .description { font-family: "NotoSans Bold"; font-size: var(--font-size-small); line-height: 22px; letter-spacing: -0.5px; opacity: 0.9; }
+#main-header.long-title .header-visual .vertical-centered { padding-right: 450px; }
+
+#main-panels { position: relative; height: auto; max-width: var(--content-width); margin: auto; }
+#main-panels .inner-panels { z-index: 1; padding-top: 100px; }
+
+#main-panels #main-panel { height: auto; margin-bottom: 40px; padding-top: 84px;  display: flex; flex-direction: row; background: url("/resources/img/overwatch/bg-main-panels.png") top center no-repeat; background-size: 100% 100%; }
+#main-panels #main-panel .account-panel { width: 365px; height: 100%; }
+#main-panels #main-panel .static-banners { width: calc(365px + 365px); height: 410px; display: flex; align-items: center; justify-content: center; }
+#main-panels #main-panel .static-banner { overflow: hidden; height: 100%; width: 100%; box-sizing: border-box; }
+#main-panels #main-panel .static-banner img { width: 100%; height: 100%; transition: 0.3s; }
+#main-panels #main-panel .static-banner.static-banner-2 { border-right: 1px solid white; border-left: 6px solid #db5911; }
+#main-panels #main-panel .static-banner.static-banner-1.default { background: url("/static/images/overwatch/static-banner-default-1.png") center no-repeat; background-size: 100% 100%; }
+#main-panels #main-panel .static-banner.static-banner-2.default { background: url("/static/images/overwatch/static-banner-default-2.png") center no-repeat; background-size: 100% 100%; }
+
+#main-panels .inner-panels .banners-panel { width: 100%; height: var(--rolling-banner-height); overflow: hidden; border-radius: var(--border-radius); }
+#main-panels .inner-panels .banners-panel .slick-list { position: relative; -webkit-transform: translate3d(0, 0, 0); -moz-transform: translate3d(0, 0, 0); -ms-transform: translate3d(0, 0, 0); -o-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); overflow: hidden; }
+#main-panels .inner-panels .banners-panel .slick-list .item { float: left; width: var(--content-width); height: var(--rolling-banner-height); }
+#main-panels .inner-panels .banners-panel .slick-list .item img { display: block; width: 100%; height: 100%; }
+#main-panels .inner-panels .banners-panel .slick-arrow { position: absolute; bottom: 0; width: 45px; height: var(--rolling-banner-height); background-color: transparent; background-image: url('/static/images/icons/bg-slide-controls.png'); background-repeat: no-repeat; opacity: .6; transition: opacity 0.4s ease; z-index: 2; }
+#main-panels .inner-panels .banners-panel .slick-arrow.prev { left: 0; background-position: left center; }
+#main-panels .inner-panels .banners-panel .slick-arrow.next { right: 0px; background-position: right center; }
+#main-panels .inner-panels .banners-panel .slick-arrow:hover { opacity: 1; cursor: pointer; }
+#main-panels .inner-panels .banners-panel .carousel-controls { width: 100%; position: absolute; bottom: 0px; box-sizing: border-box; }
+#main-panels .inner-panels .banners-panel .banners-border { position: absolute; bottom: 0px; height: 220px; width: 100%; border: 1px solid #ffffff40; box-sizing: border-box; pointer-events: none; }
+
+#main-panels .inner-panels .account-panel .button-desc { width: 100%; text-align: center; margin-top: 130px; }
+#main-panels .inner-panels .account-panel-logout .button-desc { margin-top: 55px; }
+#main-panels .inner-panels .account-panel .button-desc p { font-family: var(--font-family-defailt); color: white; font-size: var(--font-size-large); margin-bottom: 20px; }
+#main-panels .inner-panels .account-panel .button-desc span { font-family: var(--font-family-defailt); color: white; font-size: var(--font-size-medium); opacity: 0.8; }
+#main-panels .inner-panels .account-panel .links { position: absolute; top: 0px; right: 0px; padding-top: 100px; width: 366px; height: 80px; display: flex; align-items: center; justify-content: center; }
+#main-panels .inner-panels .account-panel .links a { color: white; }
+#main-panels .inner-panels .account-panel .links a:hover { filter: var(--hover-filter-1); }
+#main-panels .inner-panels .account-panel .links .divider { padding-right: 15px; margin-right: 15px; height: 15px; border-right: 1px solid #ffffff30; }
+#main-panels .inner-panels .account-panel .invisible-login { padding: 35px 60px 0; text-align: center; color: #b7b7b7; font-family: "NotoSans Light"; font-size: 1.125rem; line-height: 1.2; }
+#main-panels .inner-panels .account-panel .invisible-login strong { font-weight: normal; }
+#main-panels .inner-panels .account-panel .invisible-login a { min-width: 130px; width: 130px; height: 36px; margin-top: 20px; line-height: 36px; }
+#main-panels .inner-panels .account-panel .invisible-login a span { line-height: 36px; font-size: 1rem; }
+
+#header { background: white; color: var(--header-color); }
+#header .inner-header { width: 100%; max-width: 1590px; height: 46px; margin: 0 auto; line-height: 46px; overflow: hidden; padding: 0px 40px; box-sizing: border-box; }
+#header .inner-header .breadcrumb { float: left; }
+#header .inner-header .breadcrumb a { color: var(--header-color); font-size: 19px; }
+#header .inner-header .breadcrumb .divider { padding: 0 5px; }
+#header .inner-header .header-right { float: right; height: 100%; text-align: right; display: flex; }
+#header .inner-header .header-right a { color: var(--header-color); }
+#header .inner-header .header-right .divider { padding: 0 4px; font-size: 14px; vertical-align: initial; color: var(--desc-color); }
+#header .inner-header .header-right .total-snowball { font-family: var(--font-family-defailt); font-size: var(--font-size-medium); padding-left: 25px; color: var(--header-color); font-size: 1.25rem; letter-spacing: -1px;}
+
+#content-container { overflow: hidden; background: url("/static/images/overwatch/bg-landing.png") center top no-repeat; background-size: 1800px; min-height: 1500px; background-position-y: 590px; max-width: 100%; margin: auto;}
+
+#content { margin: auto; }
+#content .main-container { max-width: var(--content-width); margin: auto; }
+
+/* Reward Layout */
+#content .rewards-container { min-height: 600px; width: 100%; position: relative; margin-top: 12px; padding-bottom: 150px; background: url('/static/images/overwatch/bg-view-bottom.png') center top no-repeat; background-size: cover; }
+#content .rewards-container .rewards-container-content { max-width: var(--content-width); margin: auto; position: relative; }
+#content .reward-container .reward-item-view  { max-width: 95%; width: var(--content-width); margin: auto; position: relative; padding-bottom: 100px; }
+
+#content-container.overwatch-landing { width: 100%; margin: auto; background-color: var(--bg-color); }
+#content-container.overwatch-landing #content .rewards-container { background: url("/resources/img/overwatch/bg-landing-bottom.png") center top no-repeat; background-size: var(--pc-width); }
+#content-container.overwatch-landing #content .rewards-container:before { content: ''; position: absolute; left: 0; top: 51px; height: 100%; width: calc((100% - var(--pc-width))/2); max-width: 100%; background: url("/static/images/overwatch/bg-landing-repeat-left.png") top center; background-repeat-y: no-repeat; }
+#content-container.overwatch-landing #content .rewards-container:after { content: ''; position: absolute; right: 0; top: 51px; height: 100%; width: calc((100% - var(--pc-width))/2); max-width: 100%; background: url("/static/images/overwatch/bg-landing-repeat-right.png") top center; background-repeat-y: no-repeat; }
+
+.view-container-outer { width: 100%; min-height: 800px; background: url("/resources/img/overwatch/bg-view-bottom.png") top center no-repeat; background-size: var(--pc-width); }
+.view-container-outer:before { content: ''; position: absolute; left: 0; top: 50px; height: 100%; width: calc((100% - var(--pc-width))/2); max-width: 100%; background: url("/resources/img/overwatch/bg-view-repeat.png") top center; background-repeat-y: no-repeat; }
+.view-container-outer:after { content: ''; position: absolute; right: 0; top: 50px; height: 100%; width: calc((100% - var(--pc-width))/2); max-width: 100%; background: url("/resources/img/overwatch/bg-view-repeat.png") top center; background-repeat-y: no-repeat; }
+
+#content .page-title { margin-bottom: 15px; font-size: 1.125rem; font-weight: normal; }
+#content .page-title .event-name { display: block; }
+
+#content .foot-text-container { margin-top: 100px; color: white; border-top: 1px solid red; padding-top: 40px; }
+#content .foot-text-container .note { opacity: 0.8; }
+
+#content-foot { min-height: 400px; }
+#content-foot .inner-foot { padding-bottom: 40px; background-color: black; min-height: 400px; }
+#content-foot .inner-foot .foot-text-container { font-family: var(--font-family-defailt); width: 1080px; margin: 0 auto; padding: 40px 10px 0; color: white; }
+#content-foot .inner-foot .foot-text-container h4 { margin-bottom: 12px; font-size: 1.25rem; }
+#content-foot .inner-foot .foot-text-container ul,
+#content-foot .inner-foot .foot-text-container ol { padding-left: 20px; }
+#content-foot .inner-foot .foot-text-container ul li { list-style: disc; margin-bottom: 10px; }
+#content-foot .inner-foot .foot-text-container ol li { list-style: decimal; margin-bottom: 10px; }
+#content-foot .inner-foot .foot-text-container a { color: white; text-decoration: underline; }
+#content-foot .inner-foot .foot-text-container .note { font-family: "NotoSans"; color: var(--desc-color); line-height: 24px; letter-spacing: -1px; }
+
+#footer { position: absolute; left: 0; bottom: 0; width: 100%; min-width: 1160px; height: 333px; padding: 30px 20px 80px; box-sizing: border-box; overflow: hidden; z-index: 10; border-top: 1px solid #2d2d2d; background-color: #161616; }
+
+#error-wrapper { position: relative; width: 100%; min-height: 100%; padding: 0 0 333px; box-sizing: border-box; overflow: hidden; }
+
+#error-page { position: relative; padding: 200px 0; }
+#error-page .inner-error { position: relative; width: 886px; margin: 0 auto; padding: 80px 65px; background-color: rgba(255, 255, 255, .1); text-align: center; z-index: 2; }
+#error-page .inner-error .title { font-size: 1.875rem; color: #2e2e2e; font-weight: normal; }
+#error-page .inner-error .title i { position: relative; display: block; margin-bottom: 10px; font-size: 3.125rem; color: var(--snow-color); }
+#error-page .inner-error .sub-title { margin-top: 5px; }
+#error-page .inner-error .button { margin-top: 25px; }
+#error-page .full-bg-video { position: absolute; left: 0; top: 40px; width: 100%; z-index: 1; }
+
+.error-icon { color: var(--point-color); font-size: 200px; }
+.error-icon-img { width: 40px; height: 40px; margin: auto; margin-bottom: 20px; background: url('/static/images/icons/icon-x.png') center no-repeat; background-size: contain; }
+
+.wide-centered-content { padding: 60px; text-align: center; font-family: var(--font-family-defailt); }
+.wide-centered-content .title { font-family: var(--font-family-defailt); font-size: var(--font-size-large); color: var(--point-color-3); font-weight: normal; }
+.wide-centered-content .title i { position: relative; display: block; margin-bottom: 10px; font-size: 3.125rem; color: var(--snow-color); }
+.wide-centered-content .title i.fa-reward:before { content: ""; display: block; height: 45px; background: url('/static/images/icons/icon-reward.png') center top no-repeat; filter: invert(0.7); }
+.wide-centered-content .title i.fa-blocked:before { content: ""; display: block; height: 50px; background: url('/static/images/icons/icon-blocked.png') center top no-repeat; }
+.wide-centered-content .title i.fa-region:before { content: ""; display: block; height: 50px; background: url('/static/images/icons/icon-region.png') center top no-repeat; }
+.wide-centered-content .title i.fa-shipping:before { content: ""; display: block; height: 43px; background: url('/static/images/icons/icon-shipping.png') center top no-repeat; }
+.wide-centered-content .title i.fa-lock-blizzard:before { content: ""; display: block; height: 53px; background: url('/static/images/icons/icon-login.png') center top no-repeat; }
+.wide-centered-content .title i.fa-snow:before { content: ""; display: block; height: 48px; background: url('/static/images/overwatch/icon-snow.svg') center top no-repeat; }
+.wide-centered-content .title strong.icon-failure { display: block; padding-top: 195px; background: url('/static/images/icons/icon-result-failure.jpg') center top no-repeat; }
+.wide-centered-content .title strong.icon-success { display: block; padding-top: 266px; background: url('/static/images/icons/icon-result-success.jpg') center top no-repeat; }
+.wide-centered-content .title .success-ssn { font-size: 1.175rem; }
+.wide-centered-content .title i.fa-check { color: #32e330; }
+.wide-centered-content .sub-title { color: var(--point-color-3); font-size: var(--font-size-small); margin-bottom: 50px; margin-top: 30px; }
+.wide-centered-content .sub-title a { color: var(--snow-color); }
+.wide-centered-content .sub-notice { margin-top: 40px; color: #5b5b5b; }
+.wide-centered-content .link { margin: 20px 0 50px 0; }
+.wide-centered-content .link a { color: var(--snow-color); }
+.wide-centered-content .button { margin-top: 45px; }
+.wide-centered-content .inline-buttons .button { margin: 45px 6px 0; }
+.wide-centered-content .strong { color: #000; }
+.wide-centered-content .column-checkbox { margin: 25px auto 15px auto; }
+.wide-centered-content .column-checkbox input[type="checkbox"] { width: 18px; height: 18px; margin: 0 0 2px 0; vertical-align: middle; }
+.wide-centered-content .column-checkbox.privacy-agreement { width: 560px; text-align: left; }
+.wide-centered-content .privacy-form .agreement-scrolled-box { width: 530px; padding: 10px 15px; border: 1px solid #d2d2d2; background-color: #fff; overflow-x: hidden; overflow-y: auto; font-size: var(--font-size-small); color: #969696; line-height: 26px; margin: 0 auto ; text-align: left; font-family: var(--font-family-defailt); margin-bottom: 30px; }
+.wide-centered-content .privacy-form .agreement-scrolled-box strong { color: #000; }
+
+.wide-centered-content.reward-already-won { padding: 60px; text-align: center; border-radius: var(--border-radius); background-color: #d01f851c; margin-bottom: 60px; }
+
+.blue-colored-segament { position: relative; margin-top: 20px; color: var(--point-color-3); padding: 10px 0; font-size: 27px; }
+.blue-bordered-segament { padding: 25px; border: 1px solid var(--point-color-3); background-color: #fff; }
+.white-colored-segament { position: relative; margin-top: 20px; border: 1px solid var(--point-color-3); background-color: #fff; margin-bottom: 30px; padding: 15px 0; }
+.white-colored-segament .privacy-confirm { width: 80%; margin: 20px auto 10px; text-align: left; color: #464646 }
+.white-colored-segament .privacy-confirm .privacy-confirm-desc { border: 1px solid #d2d2d2; margin-top: 10px; padding: 10px; color: #979797; }
+
+.premium-rewards { position: relative; background: url("/static/images/overwatch/landing-premium.svg") center no-repeat; background-color: var(--bg-color-reward); margin-bottom: 140px; margin-top: 40px; background-size: 1080px 400px; border-radius: var(--border-radius); }
+.premium-rewards .premium-reward-items { position: relative; height: 420px; overflow: hidden; padding: 35px 10px; box-sizing: border-box; }
+.premium-rewards .premium-reward-items .slick-list { position: relative; -webkit-transform: translate3d(0, 0, 0); -moz-transform: translate3d(0, 0, 0); -ms-transform: translate3d(0, 0, 0); -o-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); overflow: hidden; }
+.premium-rewards .premium-reward-items .slick-list .reward-item { display: table; }
+.premium-rewards .premium-reward-items .reward-item { position: relative; float: left; display: none; width: 100%; height: 330px; overflow: hidden; }
+.premium-rewards .premium-reward-items .reward-item .thumbnail { position: relative; width: 500px; height: inherit; max-height: 100%; }
+.premium-rewards .premium-reward-items .reward-item .thumbnail .reward-thumbnail { width: inherit; height: inherit; display: flex; align-items: center; justify-content: center;}
+.premium-rewards .premium-reward-items .reward-item .thumbnail .reward-thumbnail img { width: auto; height: auto; min-height: 100%; max-width: 100%; max-height: 100%; object-fit: cover; }
+.premium-rewards .premium-reward-items .reward-item .reward-info { display: table-cell; width: 500px; text-align: left; vertical-align: middle; }
+.premium-rewards .premium-reward-items .reward-item .reward-info .label-badge { display: inline-block; padding: 3px 16px; background-color: var(--point-color-2-light); color: white; font-size: var(--font-size-medium); font-family: var(--font-family-defailt); line-height: 23px; margin-bottom: 10px; position: absolute; top: 15px; border-radius: var(--border-radius); }
+.premium-rewards .premium-reward-items .reward-item .reward-info .title { color: black; position: relative; width: inherit; font-family: var(--font-family-primary);  font-style: italic; font-size: var(--font-size-xlarge); font-weight: normal; line-height: 1.2; max-height: 100px; min-height: 70px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; box-sizing: border-box; padding-right: 70px; }
+.premium-rewards .premium-reward-items .reward-item .reward-info .title:after { content: ''; position: absolute; left: 0; bottom: 0px; width: 100%; height: 70px; background: url('/static/images/overwatch/landing-premium-title.svg') right bottom no-repeat; background-size: contain; }
+.premium-rewards .premium-reward-items .reward-item .reward-info .meta .snowflake-cost { display: block; margin: 10px 0 20px; font-size: var(--font-size-xlarge); color: black; }
+.premium-rewards .premium-reward-items .reward-item .reward-info .meta .snowflake-cost .icon-snow { width: 27px; height: 27px; margin-top: 3px; }
+.premium-rewards .premium-reward-items .reward-item .reward-info .meta .snowflake-cost .icon-snow-igr { width: 27px; height: 27px; margin-top: 5px; }
+.premium-rewards .premium-reward-items .reward-item .reward-info .meta .text { display: block; margin: 8px 0 13px; font-size: 1.5rem; color: var(--snow-color); }
+.premium-rewards .premium-reward-items .reward-item .reward-info .meta .button span { font-size: 1.75rem; }
+.premium-rewards .premium-reward-items .slick-dots { text-align: left; width: 450px; margin: auto; position: absolute; right: 60px; bottom: 40px; }
+.premium-rewards .premium-reward-items .slick-dots li { display: inline-block; }
+.premium-rewards .premium-reward-items .slick-dots li button { position: relative; display: block; width: 14px; height: 14px; padding: 2px; background: transparent; cursor: pointer; font-size: 0; line-height: 0; }
+.premium-rewards .premium-reward-items .slick-dots li button:before { content: ""; display: inline-block; width: 7px; height: 7px; background-color: #dfdfdf; border-radius: var(--border-radius); transition: all .5s ease; }
+.premium-rewards .premium-reward-items .slick-dots li.slick-active button:before { transform: scale(1.4); background-color: var(--point-color); }
+.premium-rewards .premium-reward-controls .slick-arrow { position: absolute; top: 190px; width: 50px; height: 45px; background-image: url('/static/images/icons/bg-premium-control.png'); background-repeat: no-repeat; background-size: contain; background-color: #ffffff00; z-index: 2; }
+.premium-rewards .premium-reward-controls .slick-arrow.prev { left: -100px; background-position: left center; transform: rotate(180deg);}
+.premium-rewards .premium-reward-controls .slick-arrow.next { right: -100px; background-position: right center; }
+.premium-rewards .premium-reward-controls .slick-arrow:hover { filter: brightness(1.1); cursor: pointer; }
+
+.snowflake-cost > svg { vertical-align: middle; }
+.snowflake-cost > span { vertical-align: middle; }
+
+.rewards-container .reward-list { width: var(--content-width); display: flex; gap: 20px 2%; flex-wrap: wrap; }
+.rewards-container .reward-list li { position: relative; width: 32%; }
+.rewards-container .reward-list li a { position: relative; display: block; width: 100%; height: 500px; box-sizing: border-box; border: 1px solid white; transition: all .2s ease-in-out; cursor: default; border-radius: var(--border-radius); overflow: hidden; padding: 8px; }
+.rewards-container .reward-list li a:before { content: ''; position: absolute; top: 0px; left: 0px; height: 100%; width: 100%; background: url("/resources/img/overwatch/landing-reward-card.svg") center no-repeat; background-size: calc(100% - 10px) calc(100% - 10px); }
+.rewards-container .reward-list li a.closed:before { background: url("/static/images/overwatch/landing-reward-card-close.svg") center no-repeat; }
+.rewards-container .reward-list li a.closed .quantity { opacity: 0.5; }
+.corner-label-premium { position: absolute; left: 20px; top: 20px; z-index: 3; }
+.corner-label-premium span { color: white; font-family: var(--font-family-primary); font-size: var(--font-size-large); font-style: italic; letter-spacing: 1.4px; padding: 7px 17px; background-color: var(--point-color); border-radius: 6px; }
+.rewards-container .reward-list li a .corner-label-employee,
+.rewards-container .reward-list li a .corner-label-restock { position: absolute; right: 0px; top: 160px; width: 100%; text-align: center; z-index: 3; }
+.rewards-container .reward-list li a .corner-label-employee span,
+.rewards-container .reward-list li a .corner-label-restock span { color: white; width: 185px; height: 55px; background-color: black; font-family: var(--font-family-defailt); border-radius: 6px; font-size: var(--font-size-large); margin: auto; display: flex; justify-content: center; align-items: center; }
+.rewards-container .reward-list li a .corner-label-restock span { border: 2px solid white; box-sizing: border-box; background-color: var(--point-color) }
+.rewards-container .reward-list .thumbnail { width: 100%; height: 275px; margin-top: 15px; display: flex; align-items: center; justify-content: center; }
+.rewards-container .reward-list .thumbnail img { cursor: pointer; display: block; margin: auto; min-height: 100%; width: 100%; max-height: 100%; object-fit: contain; z-index: 1; }
+.rewards-container .reward-list .thumbnail .reward-thumbnail { height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; }
+.rewards-container .reward-list .thumbnail .like-ani-default {  display: none; }
+.rewards-container .reward-list .thumbnail .like-ani { display: block; position: absolute; font-size: 20px; top: 215px; right: 18px; z-index: 1000; color: rgba(247, 66, 66, 0.2); animation-name: expandlike; animation-fill-mode: forwards; animation-duration: 0.5s; -webkit-animation-name: expandlike; -webkit-animation-fill-mode: forwards; -webkit-animation-duration: 0.5s; -moz-animation-name: expandlike; -moz-animation-fill-mode: forwards; -moz-animation-duration: 0.5s; -o-animation-name: expandlike; -o-animation-fill-mode: forwards; -o-animation-duration: 0.5s; -ms-animation-name: expandlike; -ms-animation-fill-mode: forwards; -ms-animation-duration: 0.5s; }
+
+.rewards-container .reward-list li .reward-like { position: absolute; right: 13px; top: 20px; z-index: 1000; width: auto; padding: 5px 13px; display: flex; align-items: center; justify-content: flex-end; border-radius: 20px; }
+.rewards-container .reward-list li .reward-like .like-section { cursor: pointer; font-family: var(--font-family-defailt); font-size: var(--font-size-medium); color: var(--point-color-2); border-radius: 30px; text-shadow: 0px 0px 9px white; }
+.rewards-container .reward-list li .reward-like .like-section.able { color: #f74242; }
+
+.rewards-container .reward-list li a .reward-info { position: relative; height: 90px; padding: 50px 20px 0px 20px; margin-top: 10px; z-index: 2; }
+.rewards-container .reward-list li a .reward-info .label-tag.label-won { background-color: #229a00; }
+.rewards-container .reward-list li a .reward-info .label-tag.label-closed { background-color: #454545; }
+.rewards-container .reward-list li a .reward-info .label.label-badge { height: 18px; border: 1px solid var(--snow-color); border-radius: 25px; color: var(--snow-color); line-height: 18px; }
+.rewards-container .reward-list li a .reward-info .title { color: black; font-size: var(--font-size-medium); font-weight: normal; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; cursor: pointer; margin-bottom: 2px; }
+.rewards-container .reward-list li a .reward-info .meta .snowflake-cost { color: black; font-size: var(--font-size-large); font-family: 'NotoSans Bold'; }
+.rewards-container .reward-list li a .reward-info .meta .quantity { padding-left: 5px; color: #969696; font-size: 0.84rem; }
+
+.label-tag-box { display: flex; position: absolute; font-size: var(--font-size-small); top: 5px; }
+.label-tag-box .label-tag { color: white; display: inline-block; min-width: 110px; padding: 2px; text-align: center; background-color: var(--point-color-2-light); border-radius: 5px; margin-right: 5px; box-sizing: border-box; }
+
+.rewards-container .reward-list li a:hover { cursor: pointer; box-shadow: 0px 0px 20px 0px #162c4ba3; transition: 0.2s; }
+.rewards-container .reward-list li a.closed:hover { box-shadow: 0px 0px 20px rgba(93,142,171,.4); }
+.rewards-container .reward-list li a.closed .corner-label-premium { filter: gray; -webkit-filter: grayscale(1); filter: grayscale(1); }
+.rewards-container .reward-list li a.closed .thumbnail img { filter: gray; -webkit-filter: grayscale(1); filter: grayscale(1); opacity: .4; }
+.rewards-container .reward-list li a.closed .reward-info .title,
+.rewards-container .reward-list li a.closed .reward-info .meta .snowflake-cost { opacity: 0.4; }
+
+.reward-list li .quantity { width: calc(100% - 16px); height: 32px; font-family: var(--font-family-second); text-align: center;  bottom: 8px; border-radius: 0px 0px 6px 6px; color: white; position: absolute; padding: 1px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; }
+.reward-list li.reward-currency-type-1 .quantity { background-color: var(--point-color-2); }
+.reward-list li.reward-currency-type-2 .quantity { background-color: var(--point-color); }
+
+.reward-item-view { position: relative; width: 100%; min-height: 470px; margin-bottom: 60px; display: flex; align-items: flex-start; justify-content: space-between; gap: 0px 65px; }
+.reward-item-view .corner-label-premium { left: 20px; top: 20px; }
+.reward-item-view .thumbnail { position: relative; min-width: 550px; height: 500px; padding: 8px; box-sizing: border-box; background: url('/static/images/overwatch/reward.svg') center no-repeat; background-color: var(--bg-color-reward); border-radius: 7px; flex: 1; overflow: hidden; }
+.reward-item-view .thumbnail .reward-thumbnail { display: flex; justify-content: center; align-items: center; height: 100%; width: 100%; }
+.reward-item-view .thumbnail img { display: block; width: auto; min-height: 100%; max-width: 100%; max-height: 100%; margin: auto; object-fit: cover; }
+.reward-item-view .reward-info { flex: 1; width: 100%; height: 100%; position: relative; }
+.reward-item-view .reward-info .reward-info-top { width: 100%; height: 100px; }
+.reward-item-view .reward-info .reward-info-top .like-text { position: absolute; top: 10px; left: 0px; font-size: var(--font-size-medium); color: var(--point-color-3); cursor: pointer;  }
+.reward-item-view .reward-info .reward-info-top .like-text span.likeIcon { margin-right: 5px; }
+.reward-item-view .reward-info .reward-info-top .like-text.able { color: #f74242; }
+.reward-item-view .reward-info .reward-info-top .like-ani-default {
+	display: none;
+	position: absolute;
+	top: 20px;
+	right: 44px;
+	color: rgba(247, 66, 66, 0.2);
+	font-size: 20px;
+	animation-name: expandsublike;
+	animation-fill-mode: forwards;
+	animation-duration: 0.5s;
+	-webkit-animation-name: expandsublike;
+	-webkit-animation-fill-mode: forwards;
+	-webkit-animation-duration: 0.5s;
+	-moz-animation-name: expandsublike;
+	-moz-animation-fill-mode: forwards;
+	-moz-animation-duration: 0.5s;
+	-o-animation-name: expandsublike;
+	-o-animation-fill-mode: forwards;
+	-o-animation-duration: 0.5s;
+	-ms-animation-name: expandsublike;
+	-ms-animation-fill-mode: forwards;
+	-ms-animation-duration: 0.5s;
+}
+
+.reward-item-view .reward-info .label-employee { margin-bottom: 5px; padding-left: 36px; background: url('/static/images/icons/label-employee.png') no-repeat; }
+.reward-item-view .reward-info .label-employee span { color: #009ae4; line-height: 21px; }
+.reward-item-view .reward-info .label-badge { width: 120px; letter-spacing: -1px; color: var(--subtitle-color); display: inline-block; padding: 3px 15px; text-align: center; font-weight: bold; background-color: var(--point-color-2); border-radius: 6px; margin: 5px 0px; box-sizing: border-box; }
+.reward-item-view .reward-info .label-badge span { color: white; font-size: var(--font-size-small); }
+.reward-item-view .reward-info .title { color: var(--point-color-2); font-family: var(--font-family-defailt); font-size: var(--font-size-xlarge); margin: 10px 0 30px 0; }
+.reward-item-view .reward-info .description { display: none; margin: 15px 0; color: var(--desc-color); }
+.reward-item-view .reward-info .description ul,
+.reward-item-view .reward-info .description ol { padding-left: 20px; }
+.reward-item-view .reward-info .description ul li { list-style: disc; }
+.reward-item-view .reward-info .description ol li { list-style: decimal; }
+.reward-item-view .reward-info .description a { color: var(--snow-color); text-decoration: underline; }
+.reward-item-view .reward-info .meta .snowflake-cost { font-size: var(--font-size-xlarge); color: black; }
+.reward-item-view .reward-info .meta .quantity { padding-left: 10px; padding-right: 20px; font-size: 18px; color: #969696; }
+.reward-item-view .reward-info .social-links { position: absolute; top: 0px; right: 0px; }
+.reward-item-view .reward-info .social-links a { display: inline-block; margin: 0 2px; filter: brightness(0.8); transition: 0.2s; }
+.reward-item-view .reward-info .social-links a:hover { filter: brightness(0.5); transition: 0.2s; }
+.reward-item-view .reward-info .social-links a.facebook { width: 45px; height: 45px; background: url('/static/images/overwatch/icon-facebook.png') center no-repeat; background-size: contain; }
+.reward-item-view .reward-info .social-links a.twitter { width: 45px; height: 45px; background: url('/static/images/overwatch/icon-twitter.png') center no-repeat; background-size: contain; }
+
+#reward-apply-content .title { color: var(--subtitle-color); }
+#reward-apply-content #captcha { display: none; width: 492px; margin: 30px auto; padding: 20px; border: 1px solid var(--point-color-3); background-color: white; }
+#reward-apply-content-after { display: none; }
+
+.legal-agreement-form .desc { margin-bottom: 35px; font-size: 1.25rem; }
+.legal-agreement-form .desc strong { color: var(--snow-color); font-family: "NotoSans Bold"; }
+.legal-agreement-form .grid-two-columns { text-align: left; color: #464646; }
+.legal-agreement-form .grid-two-columns .row .column-title { margin-bottom: 10px; font-size: 1.25rem; font-family: "NotoSans Bold"; font-weight: normal; }
+.legal-agreement-form .grid-two-columns .row .column-title a { color: var(--snow-color); font-size: 1rem; font-family: var(--font-family-defailt); }
+.legal-agreement-form .grid-two-columns .row .column { padding-bottom: 25px; }
+.legal-agreement-form .grid-two-columns .row .column .column-box { padding: 10px 15px; border: 1px solid #d2d2d2; }
+.legal-agreement-form .grid-two-columns .row .column .column-box dl { padding-top: 10px; }
+.legal-agreement-form .grid-two-columns .row .column .column-box dl dt { float: left; width: 25%; text-align: right; }
+.legal-agreement-form .grid-two-columns .row .column .column-box dl dd { float: left; width: 75%; padding-left: 20px; padding-bottom: 10px; box-sizing: border-box; }
+.legal-agreement-form .grid-two-columns .row .column .column-scrolled-box { height: 85px; overflow-x: hidden; overflow-y: auto; font-size: 0.84rem; color: #969696; line-height: 29px; }
+.legal-agreement-form .grid-two-columns .row .column .column-checkbox { margin-bottom: 12px; }
+.legal-agreement-form .grid-two-columns .row .column .column-checkbox input[type="checkbox"] { width: 18px; height: 18px; margin: 0 0 2px 0; vertical-align: middle; }
+.legal-agreement-form .grid-two-columns .row .floated-left { float: left; display: inline-block; }
+.legal-agreement-form .grid-two-columns .row .floated-right { float: right; display: inline-block; }
+.legal-agreement-form .grid-two-columns .row .half-column { width: 473px; }
+.legal-agreement-form .grid-two-columns .row .wide-column { width: 100%; box-sizing: border-box; }
+.legal-agreement-form .blue-colored-segament { padding: 50px; }
+.legal-agreement-form .blue-colored-segament .title i { position: relative; top: -3px; display: inline; font-size: 1.375rem; }
+.legal-agreement-form .blue-colored-segament .title strong { font-weight: normal; font-family: var(--font-family-defailt); }
+.legal-agreement-form .blue-colored-segament .sub-title { margin-top: 0; }
+.legal-agreement-form .blue-colored-segament .button { margin-top: 25px; }
+
+.coupon-claim-form .field { margin: 20px 50px 0; }
+.coupon-claim-form .field label { font-family: "NotoSans Bold"; }
+.coupon-claim-form .field input { width: 80%; max-width: 600px; height: 45px; line-height: 45px; text-align: center; vertical-align: middle; }
+.coupon-claim-form .captcha { margin-top: 20px; }
+.coupon-claim-form .field-error { color: var(--point-color); }
+.coupon-claim-form .field-success { color: #20ab00; }
+.coupon-claim-form .action { margin: 20px 0; }
+.coupon-claim-form.error legend,
+.coupon-claim-form.success legend { display: none; }
+.coupon-claim-form.error .field-error { display: block; }
+.coupon-claim-form.success .field-success { display: block; }
+
+.payment-product-list .product-list { width: 100%; background-color: #fff; border: 1px solid var(--point-color-3); border-collapse: separate; border-spacing: 0; }
+.payment-product-list .product-list thead th { padding: 10px 0; background-color: #f1f7fb; border-bottom: 1px solid #e3eff6; font-weight: normal; }
+.payment-product-list .product-list thead th:nth-child(1) { width: 15%; }
+.payment-product-list .product-list thead th:nth-child(2) { width: 10%; }
+.payment-product-list .product-list thead th:nth-child(3) { width: 10%; }
+.payment-product-list .product-list thead th:nth-child(4) { width: 50%; }
+.payment-product-list .product-list thead th:nth-child(5) { width: 15%; }
+.payment-product-list .product-list tbody td { height: 30px; padding: 10px; border-bottom: 1px solid #e3eff6; text-align: center; font-size: 0.84rem; }
+.payment-product-list .product-list tbody td.dataTables_histories { padding-left: 140px; text-align: left; }
+.payment-product-list .product-list tbody td.dataTables_empty { padding: 30px 0; line-height: 1.4; }
+.payment-product-list .product-list tbody td.dataTables_empty strong { font-size: 1.125rem; color: var(--snow-color); font-family: "NotoSans Bold"; font-weight: normal; }
+.payment-product-list .product-list tbody tr:last-child td { border-bottom: none; }
+.payment-product-list .product-list tbody tr:hover { background-color: #f1f7fb; }
+.payment-product-list .product-list tbody tr.won td:nth-child(4) { color: #ff5e12; }
+.payment-product-list .product-list tbody tr.plus td:nth-child(2),
+.payment-product-list .product-list tbody tr.plus td:nth-child(3) { color: #ff0000; }
+.payment-product-list .product-list tbody tr.plus td:nth-child(3):before { content: '+'; padding-right: 5px; }
+.payment-product-list .product-list tbody tr.minus td:nth-child(2),
+.payment-product-list .product-list tbody tr.minus td:nth-child(3) { color: var(--snow-color); }
+.payment-product-list .product-list tbody tr.minus td:nth-child(3):before { content: '-'; padding-right: 5px; }
+
+#digital-code-content .title { display: none; color: #464646; }
+#digital-code-content .code-content { display: none; padding: 12px 0; }
+#digital-code-content .code-content .code-number { display: none; width: 80%; min-width: 500px; margin: 0 auto; padding: 0 10px; border: 1px solid var(--bg-black-30); font-family: "NotoSans Bold"; line-height: 45px; white-space: nowrap; }
+#digital-code-content .code-content .code-number .copy-button { margin-left: 6px; color: var(--premium-color); }
+#digital-code-content .code-content .barcode { display: none; }
+#digital-code-content .code-content .barcode img { border: 1px solid #cacaca; }
+#digital-code-content .code-description { display: none; font-family: var(--font-family-defailt); padding: 20px; color: var(--desc-color); font-size: 0.84rem; text-align: left; max-width: 630px; margin: auto; background-color: #ffffff17; padding: 20px; box-sizing: border-box; }
+#digital-code-content .code-description h4 { margin-bottom: 5px; font-size: 1rem; color: #fff; font-family: "NotoSans Bold"; font-weight: normal; }
+#digital-code-content .code-description ul,
+#digital-code-content .code-description ol { padding-left: 20px; color: #686868; }
+#digital-code-content .code-description ul li { list-style: disc; }
+#digital-code-content .code-description ol li { list-style: decimal; }
+#digital-code-content .code-description ol li a,
+#digital-code-content .code-description ul li a { color: var(--snow-color); }
+
+#digital-code-content #data-reward-name { font-family: var(--font-family-second); color: var(--subtitle-color); font-size: 24px; }
+
+#digital-code-error { display: none; }
+#digital-code-error .button.white-button { min-width: 148px; height: 32px; line-height: 32px; }
+#digital-code-error .button.white-button span { font-size: 0.9375rem; line-height: 30px; }
+
+.dataTables_paginate { margin-top: 30px; margin-bottom: 10px; text-align: center; }
+.dataTables_paginate a,
+.dataTables_paginate span.ellipsis { display: inline-block; min-width: 35px; margin: 0 2px; padding: 0 4px; box-sizing: border-box; border-radius: 3px; background-color: transparent; font-size: var(--font-size-small); color: var(--button-color-2); line-height: 29px; text-align: center; cursor: pointer; }
+.dataTables_paginate span.ellipsis { cursor: context-menu; }
+.dataTables_paginate a.current { background-color: transparent; border: 1px solid var(--button-color-2); color: var(--button-color-2); }
+.dataTables_paginate a.previous,
+.dataTables_paginate a.next { padding: 0 12px; }
+.dataTables_paginate a.previous { margin-right: 4px; }
+.dataTables_paginate a.next { margin-left: 4px; }
+.dataTables_paginate a.disabled { color: #bdbdbd; cursor: context-menu; }
+
+.content-shipping { position: relative; margin-bottom: 30px; }
+.content-shipping .title { margin-bottom: 10px; font-weight: normal; max-width: var(--content-width); margin: auto; }
+.content-shipping .title .event-subtitle { color: var(--point-color-3); font-size: 1.125rem; }
+.content-shipping .title .event-name { display: block; font-size: var(--font-size-xxlarge); color: var(--point-color-3); margin-bottom: 100px; font-family: var(--font-family-primary); font-style: italic; }
+#insert-successed .sub-title { font-size: var(--font-size-medium); }
+.sub-title .desc-shipping-modify { color: var(--subtitle-color); font-size: 20px; margin-bottom: 5px; }
+
+.shipping-insert-form { text-align: center; margin-top: 30px; padding-bottom: 70px; background-color: white; border-radius: var(--border-radius); box-shadow: 1px 2px 4px 2px var(--bg-color); }
+.shipping-insert-form .title { font-size: var(--font-size-large); color: var(--subtitle-color); font-weight: bold; font-family: var(--font-family-defailt); margin-top: 50px; margin-bottom: 50px; letter-spacing: 2px; }
+.shipping-insert-form .blue-colored-segament { margin-top: 60px; margin-bottom: 10px; font-size: 22px; font-family: var(--font-family-defailt); }
+.shipping-insert-form .inline-buttons { margin: 35px 0; }
+.shipping-insert-form .inline-buttons .link { margin-top: 20px; }
+.shipping-insert-form .inline-buttons .link a { color: var(--snow-color); }
+.shipping-insert-form .shipping-empty { position: relative; border-bottom: 1px solid var(--point-color-3); padding: 55px 0 35px 50px; margin: auto; margin-bottom: 50px; text-align: left; background: url("/static/images/overwatch/bg-shipping-title.png") center no-repeat; border-radius: 10px 10px 0px 0px; }
+.shipping-insert-form .shipping-empty h2 { color: #fff; font-size: var(--font-size-large); font-weight: normal; }
+.shipping-insert-form .shipping-empty p { color: #ffffffb0; font-size: 1.2rem; width: 70%; max-width: 600px; margin: 20px 0; word-break: keep-all; }
+.shipping-insert-form .shipping-empty a { color: white; font-weight: bold; }
+.shipping-insert-form .required-mark { position: absolute; right: 110px; top: -30px; color: var(--point-color); font-family: var(--font-family-defailt); font-size: 16px; }
+.shipping-insert-form .required-mark span { color: var(--subtitle-color); }
+.shipping-insert-form .field { margin-bottom: 20px; }
+.shipping-insert-form .field dl { color: black; display: flex; align-items: flex-start; flex-wrap: wrap; }
+.shipping-insert-form .field dl dt { font-weight: bold; color: var(--subtitle-color); font-size: var(--font-size-medium); width: 32%; box-sizing: border-box; text-align: right; padding-right: 15px; margin-top: 2px; }
+.shipping-insert-form .field.required dl dt:before { content: "*"; display: inline-block; margin-right: 4px; color: #ff6666; vertical-align: top; }
+.shipping-insert-form .field dl dd { width: 68%;text-align: left; }
+.shipping-insert-form .field dl dd input[type="text"], .shipping-insert-form .field dl dd input[type="password"] { width: 110px; height: 34px; line-height: 34px; text-indent: 10px; font-size: 1rem; font-family: var(--font-family-defailt); vertical-align: middle; }
+.shipping-insert-form .field dl dd input[name="streetMain"] { width: 370px; }
+.shipping-insert-form .field dl dd input[name="streetSub"] { width: 150px; }
+.shipping-insert-form .field dl dd input[name="ssn"] { width: 170px; }
+.shipping-insert-form .field dl dd input[type="checkbox"] { width: 18px; height: 18px; margin: 0 0 2px 0; vertical-align: middle; }
+.shipping-insert-form .field button { width: 100px; height: 34px; margin: 0 2px; background-color: var(--point-color); border: none; color: #fff; cursor: pointer; vertical-align: middle; transition: background-color .2s ease; }
+.shipping-insert-form .field button:hover { filter: brightness(1.1); }
+.shipping-insert-form .field .agreement-scrolled-box { width: 500px; padding: 10px 15px; background-color: #fff; overflow-x: hidden; overflow-y: auto; font-size: 0.84rem; color: #969696; line-height: 26px; border: 1px solid var(--bg-black-20); margin-bottom: 30px; }
+.shipping-insert-form .field .agreement-scrolled-box strong { color: #000; }
+.shipping-insert-form .field .agreement-notice  { font-size: var(--font-size-small); margin: 10px 0px 5px 0px; }
+.shipping-insert-form .sub-title { border-top: 1px solid var(--bg-black-20); width: 900px; margin: auto; padding-top: 40px; padding-bottom: 30px; }
+.shipping-insert-form .sub-title .desc { display: block; font-size: var(--font-size-small); font-family: var(--font-family-defailt); line-height: 24px; }
+.shipping-insert-form .sub-title .award-desc { margin-top: 15px; padding-bottom: 15px; font-size: 1.125rem; font-family: "NotoSans Bold"; color: var(--snow-color); line-height: 1; }
+.shipping-insert-form .sub-title .award-desc svg { position: relative; top: -2px; left: 4px; }
+.shipping-insert-form .field-error { display: none; padding: 45px 0; margin-top: 20px; }
+.shipping-insert-form .field-error i { display: block; margin-bottom: 10px; font-size: 3.125rem; color: var(--point-color); }
+.shipping-insert-form .field-error strong { display: block; margin-bottom: 10px; font-size: 1.45rem; font-family: var(--font-family-defailt); font-weight: normal; color: var(--subtitle-color); }
+.shipping-insert-form .shipping-success { display: block; font-size: 1.25rem; }
+.shipping-insert-form .shipping-success i { color: #2de32c; font-size: 3rem; }
+.shipping-insert-form .shipping-success .success-ssn { font-size: 1rem; padding-bottom: 25px; }
+.shipping-insert-form .shipping-success .success-ssn a { color: #0658a1; }
+
+.shipping-insert-form #field-captcha { display: none; }
+.shipping-insert-form #field-captcha .captcha { padding-top: 10px; border-top: 1px solid var(--point-color-3); }
+.shipping-insert-form #field-captcha .captcha .captcha-input { width: 200px; text-indent: 0; vertical-align: top; }
+.shipping-insert-form[data-error-field="captcha"] #field-captcha { display: block; }
+.shipping-insert-form[data-error-field="unknown"] .error-unknown { display: block; }
+.shipping-insert-form[data-error-field="captcha"] .error-captcha { display: block; }
+
+.wide-centered-content .shipping-insert-form { padding: 0px; }
+
+.content-rules .event-subtitle { color: var(--point-color); font-size: var(--font-size-small); }
+.content-rules .event-name { font-family: var(--font-family-primary); display: block; font-size: var(--font-size-xlarge); font-style: italic; color: var(--point-color-3); }
+.content-rules .rules-text { padding: 25px; font-size: 1rem; background-color: white; }
+.content-rules .rules-text strong { line-height: 1.8; }
+
+.privacy-agreement label, .agreement label { cursor: pointer; font-size: var(--font-size-medium); font-family: var(--font-family-defailt); }
+
+#content-container.overwatch-landing .shipping-notice-banner { font-family: var(--font-family-second); display: flex; height: 45px; text-align: center; background-color: var(--subtitle-color); max-width: 1920px; margin: auto; overflow: hidden; align-items: center; justify-content: center; color: white; cursor: pointer; font-size: 18px; }
+#content-container.overwatch-landing .shipping-notice-banner:hover { font-weight: bold; }
+#content-container.overwatch-landing .notice-banner { font-family: var(--font-family-second); display: flex; height: 45px; text-align: center; background-color: #ffffff29; max-width: 1920px; margin: auto; overflow: hidden; align-items: center; justify-content: center; color: white; cursor: pointer; font-size: 18px; }
+#content-container.overwatch-landing .notice-banner:hover { font-weight: bold; }
+#content-container.overwatch-history { padding-top: 50px; background: url("/static/images/overwatch/bg-landing.png") center top no-repeat; background-size: 1920px auto; }
+#content-container.overwatch-shipping,
+#content-container.overwatch-reward { padding-top: 150px; background-size: 1800px; min-height: 1100px; background-position-y: -150px; }
+#content-container.overwatch-history:before,
+#content-container.overwatch-shipping:before,
+#content-container.overwatch-reward:before { content: ''; width: 100%; display: block; height: 800px; background: url("/static/images/overwatch/bg-reward-top.svg") center top no-repeat; background-size: 100% 100%; position: absolute; top: 86px; opacity: 0.7; }
+#content-container.overwatch-reward .main-container { padding-top: 100px; }
+#content-container.content-rules { padding-top: 50px; background: url("/static/images/overwatch/bg-reward-top.svg") no-repeat; background-size: 100%; min-height: 1500px; padding-bottom: 200px; background-color: var(--bg-color);}
+#content-container.content-rules #content { max-width: var(--content-width); }
+
+.reward-item-detail-view .wide-centered-content { width: 100%; margin-top: 50px; background-color: white; box-sizing: border-box; border-radius: var(--border-radius); }
+.reward-detail-img img { width: 100%; display: block; }
+.reward-detail-img img:first-child { margin-top: 120px; }
+
+.account-panel .links { position: relative; }
+.account-panel .main-account-panel-title, .account-panel .total-snowball { width: 82%; margin: auto; border-bottom: 1px solid #ffffff29; position: relative; }
+.account-panel .main-account-panel-title { color: white; font-family: var(--font-family-defailt); font-size: var(--font-size-large); line-height: 32px; }
+.account-panel .main-account-panel-title .main-account-panel-status { cursor: default; text-align: center; height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.account-panel .main-account-panel-title span.snow-reload { cursor: pointer; position: absolute; top: 20px; width: 25px; height: 25px; background-color: var(--bg-black-30); right: 5px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.account-panel .main-account-panel-title i.fa-refresh:before,
+.account-panel .main-account-panel-title i.fa-spinner:before { font-size: 15px; margin-top: 0px; display: block; }
+
+.account-panel.account-panel-logout .item-buttons .button-login { margin: auto; margin-top: 90px; }
+.account-panel.account-panel-logout .total-snowball { border: none; }
+
+.account-panel .total-snowball { color: white; height: 90px; padding: 0px 10px 0px 0px; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; }
+.account-panel .total-snowball span { vertical-align: middle; }
+.account-panel .total-snowball .snow-unit { font-size: var(--font-size-medium); cursor: default; }
+.account-panel .total-snowball .snow-point { font-size: 28px; }
+.account-panel .total-snowball.total-snowball-igr .snow-point { color: var(--snow-igr-color); }
+
+/* Static Banner Guide(PC) : 365px x 410px */
+
+.tooltip-shipping-info { position: absolute; top: 0px; display: flex; width: 335px; height: 100px; right: 0px; color: #ffffffb8; font-family: var(--font-family-defailt); background: url("/static/images/overwatch/bg-tooltip.png") center no-repeat; background-size: cover; font-size: var(--font-size-small); transition: 0.2s; align-items: flex-start; justify-content: center; text-align: center; }
+.tooltip-shipping-info:hover { cursor: pointer; filter: brightness(1.4); transition: 0.2s; }
+.tooltip-shipping-info span { margin-top: 15px; }
+
+.icon-snow { width: 17px; height: 17px; vertical-align: middle; display: inline-block; fill: black; }
+.icon-snow-igr { background: url('/resources/img/icons/icon-snow-igr.png') center no-repeat; background-size: contain; width: 20px; height: 20px; display: inline-block; vertical-align: middle; }
+.icon-snow-igr.fill-black { filter: brightness(0); }
+.account-panel .total-snowball .snow-point .icon-snow-igr { width: 25px; height: 22px; margin-right: 5px; margin-top: 3px; vertical-align: middle; }
+.account-panel .total-snowball .snow-point .icon-snow { fill: white; display: inline-block; padding-top: 2px; width: 22px; height: 22px; }
+.reward-item-view .reward-info .icon-snow-igr { width: 30px; height: 30px; }
+.reward-item-view .reward-info .icon-snow { width: 28px; height: 28px; margin-top: 4px; }
+
+
+/* Landing - Event Period */
+.period-container { width: 100%; display: flex; background-color: white; height: 35px; justify-content: center; align-items: center; }
+.period-container ul.periods { display: flex; position: relative; }
+.period-container ul.periods li { font-family: var(--font-family-defailt); color: var(--subtitle-color); line-height: 1.8; position: relative; display: flex; align-items: center; }
+.period-container ul.periods li:nth-child(2),
+.period-container ul.periods li:nth-child(3) { margin-left: 25px; }
+.period-container ul.periods li:nth-child(2):before,
+.period-container ul.periods li:nth-child(3):before { content: ''; width: 4px; height: 4px; background-color: var(--point-color-2); position: absolute; left: -10px; top: 14px; border-radius: 2px; }
+.period-container ul.periods li b { margin-right: 10px; padding-right: 10px; position: relative; }
+.period-container ul.periods li b:after { content: ''; width: 0px; height: 15px; position: absolute; border-right: 1px solid var(--subtitle-color); top: 8px; right: 0px; }
+.period-container ul.periods li span { opacity: 0.85; font-size: var(--font-size-small); color: var(--subtitle-color); }
+.period-container ul.periods .period-subtitle { vertical-align: middle; font-size: 16px; }
+.period-container ul.periods .period-div { vertical-align: middle; width: 1px; display: inline-block; border-right: 1px solid gray; margin-right: 10px; margin-left: 10px; height: 18px; }
+.period-container ul.periods .period-date { vertical-align: middle; opacity: 0.7; font-size: var(--font-size-small); }
+.period-container ul.periods .period-desc { font-size: 16px; opacity: 0.7; font-family: var(--font-family-defailt); }
+
+
+/* My Page - History (/transaction) */
+.snow-history-info { font-family: var(--font-family-defailt); position: relative; margin: 70px auto; color: var(--point-color-3); max-width: var(--content-width); width: 90%; display: flex; flex-direction: row; justify-content: space-between; }
+.snow-history-info .title { margin-bottom: 5px;  font-weight: normal; }
+.snow-history-info .title .event-subtitle { color: var(--point-color-3); font-size: 1.125rem; }
+.snow-history-info .title .event-name { display: block; font-size: var(--font-size-xxlarge); color: var(--point-color-3); font-family: var(--font-family-primary); font-style: italic; }
+.snow-history-info .periods { font-size: 0.84rem; }
+.snow-history-info .periods dt { float: left; padding: 0 5px; color: white; font-size: 16px; }
+.snow-history-info .periods dt:before { content: "\f073"; padding-right: 2px; font-family: "FontAwesome"; }
+.snow-history-info .periods dd { float: left; color: var(--point-color-3); font-size: 16px; opacity: 0.8; }
+.snow-history-info .periods dd.desc { clear: both; float: left; padding-left: 20px; color: #777; font-family: var(--font-family-defailt); }
+.snow-history-info .right-snow-box { display: flex; align-items: center; justify-content: space-around; height: 174px; width: 536px; box-sizing: border-box; background: url("/resources/img/overwatch/bg-history-snow.png") no-repeat; background-size: contain; }
+.snow-history-info .right-snow-box .snow-box { width: 50%; height: 100%; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: left; padding-left: 40px; }
+.snow-history-info .right-snow-box .snow-box.snow-igr { color: var(--snow-igr-color); }
+.snow-history-info .right-snow-box .snow-box.snow-normal { color: white; }
+.snow-history-info .right-snow-box .snow-box .total-snow { font-size: var(--font-size-large); display: flex; align-items: center; }
+.snow-history-info .right-snow-box .snow-box .total-snow .icon-snow-igr,
+.snow-history-info .right-snow-box .snow-box .total-snow .icon-snow { fill: white; width: 24px; height: 24px; margin-right: 10px; }
+.snow-history-info .right-snow-box .snow-box p { font-family: var(--font-family-second); font-size: var(--font-size-large); margin: 3px 0px; }
+.snow-history-info .right-snow-box .snow-box ul { line-height: 28px; }
+.snow-history-info .right-snow-box .snow-box ul li strong { font-weight: normal; }
+
+.history-list .toggle-options { font-family: 'BlackFit77'; margin-bottom: 50px; height: 27px; }
+.history-list .toggle-options > div { display: inline-block; flex-direction: row; }
+.history-list .toggle-options > div:nth-child(2) { float: right; }
+.history-list .toggle-options > div .toggle-options-title { color: var(--point-color-3); vertical-align: text-top; padding-right: 10px; font-weight: bold;  }
+.history-list .toggle-options dl { line-height: 26px; }
+.history-list .toggle-options dl:nth-child(2) { float: right; }
+.history-list .toggle-options dl dt { float: left; margin-right: 10px; margin-left: 46px; font-size: 1.25rem; color: var(--snow-color); font-family: var(--font-family-defailt); font-weight: normal; }
+.history-list .toggle-options dl dt:first-child { margin-left: 0; }
+.history-list .toggle-options dl dd { float: left; min-width: 100px; margin: 0 4px; text-align: center; }
+.history-list .toggle-options dl dd a { color: var(--button-color-3); display: block; font-size: var(--font-size-small); border: 1px solid #183a6050; border-radius: 4px; }
+.history-list .toggle-options dl dd a:hover { color: white; background-color: var(--button-color-3); }
+.history-list .toggle-options dl dd a.active { color: white; background-color: var(--button-color-3); }
+.history-list .histories { width: 100%; border-top: 1px solid var(--point-color-3); border-bottom: 1px solid #183a6050; border-collapse: separate; border-spacing: 0; }
+.history-list .histories thead th { font-family: var(--font-family-defailt); padding: 10px 0; border-bottom: 1px solid #183a6050; font-weight: bold; }
+.history-list .histories thead th:nth-child(1) { width: 15%; }
+.history-list .histories thead th:nth-child(2) { width: 10%; }
+.history-list .histories thead th:nth-child(3) { width: 10%; }
+.history-list .histories thead th:nth-child(4) { width: 50%; }
+.history-list .histories thead th:nth-child(5) { width: 15%; }
+.history-list .histories tbody td { height: 30px; padding: 10px; border-bottom: 1px solid #183a6050; text-align: center; font-size: var(--font-size-small); position: relative; }
+.history-list .histories tbody td span { position: relative; }
+.history-list .histories tbody td.dataTables_histories { padding-right: 140px; text-align: left; }
+.history-list .histories tbody td.dataTables_empty { padding: 30px 0; line-height: 1.4; }
+.history-list .histories tbody td.dataTables_empty strong { display: block; font-size: var(--font-size-large); color: var(--point-color-3); font-family: var(--font-family-defailt); font-weight: 100; }
+.history-list .histories tbody tr:last-child td { border-bottom: none; }
+.history-list .histories tbody tr:hover { background-color: #183a6008; }
+.history-list .histories tbody tr.plus td:nth-child(3) { color: black; }
+.history-list .histories tbody tr.plus td:nth-child(3) span:before { content: '+'; font-weight: bold; position: absolute; left: -12px; }
+.history-list .histories tbody tr.minus td:nth-child(3) { color: var(--button-color-2); }
+.history-list .histories tbody tr.minus td:nth-child(3) span:before { content: '-'; font-weight: bold; position: absolute; left: -12px; }
+.history-list .histories tbody tr[data-currency-type="igr"][data-sign-type="plus"] td:nth-child(3) { color: var(--premium-color); }
+.history-list .histories tbody tr td:nth-child(4) .reward-won { color: var(--point-color); font-size: var(--font-size-medium); margin-left: 3px; font-family: var(--font-family-primary); font-style: italic; text-shadow: 1px 1px 1px var(--premium-color); word-break: keep-all; }
+.history-list .histories tbody tr td:nth-child(4) .reward-lose { font-family: var(--font-family-primary); font-style: italic; font-size: var(--font-size-medium); color: var(--bg-black-70); word-break: keep-all; }
+
+.history-container ul.periods { color: var(--point-color-3); font-family: var(--font-family-defailt); font-size: var(--font-size-small); font-weight: bold; }
+.history-container ul.periods .period-subtitle { vertical-align: middle; }
+.history-container ul.periods .period-div { vertical-align: middle; width: 1px; display: inline-block; border-right: 2px solid var(--point-color-3); margin: 0px 3px; height: 14px;}
+.history-container ul.periods .period-date { vertical-align: middle; }
+.history-container ul.periods .period-desc { color: var(--desc-color); font-weight: normal; padding-left: 12px; font-size: var(--font-size-xsmall); }
+.history-container ul.periods .period-desc:before { content: '*'; width: 4px; height: 5px; position: absolute; left: 2px; }
+.history-container ul.periods li:nth-child(2) { margin: 5px 0px; }
+
+/* Landing - Reward Tab */
+#reward-title-tab { height: 100px; max-width: var(--pc-width); margin: auto; display: flex; align-items: flex-start; justify-content: center; font-size: var(--font-size-large); line-height: 34px; }
+#reward-title-tab .reward-title-tab { text-decoration: none; width: 50%; padding: 20px 50px; text-align: center; box-sizing: border-box; }
+#reward-title-tab .reward-title-tab h3 { cursor: default; width: 445px; font-weight: normal; }
+#reward-title-tab .reward-title-tab h3:hover { cursor: pointer; font-weight: bold; }
+#reward-title-tab #reward-title-tab-igr h3 { float: right; color: var(--point-color); }
+#reward-title-tab #reward-title-tab-normal h3 { float: left; color: var(--point-color-2); }
+
+/* Landing - Reward Title */
+#reward-title-normal.reward-title { background-image: url('/static/images/overwatch/landing-reward-title-normal.svg'); }
+#reward-title-igr.reward-title { background-image: url('/resources/img/overwatch/landing-reward-title-igr.svg'); }
+.reward-title { background-repeat: no-repeat; background-size: 100% 100%; color: white; font-family: var(--font-family-primary); font-style: italic; font-size: var(--font-size-xlarge); padding: 10px 20px; margin: 140px 0px 40px 0px; }
+#reward-title-normal.reward-title h4,
+#reward-title-igr.reward-title h4 { font-weight: normal; }
+
+@media (max-width: 1100px) {
+	.period-container ul.periods li b,
+	.period-container ul.periods li span {
+		font-size: 12px;
+	}
+	.period-container ul.periods li b:after {
+		height: 12px;
+	}
+}
+
+@media (max-width: 1440px) {
+	.premium-rewards .premium-reward-controls .slick-arrow.prev {
+		left: 30px;
+	}
+
+	.premium-rewards .premium-reward-controls .slick-arrow.next {
+		right: 30px;
+	}
+}
+
+/*@media (min-width: 2199px) {*/
+/*	#main-header .header-visual .vertical-centered .sub-title {*/
+/*		font-size: var(--font-size-large);*/
+/*	}*/
+
+/*	#main-header .header-visual .vertical-centered .description {*/
+/*		font-size: var(--font-size-medium);*/
+/*		line-height: 26px;*/
+/*	}*/
+/*}*/
+
+/*@media (max-width: 2200px) {*/
+/*	#main-header .header-visual .background:before,*/
+/*	#main-header .header-visual .background:after {*/
+/*		display: none;*/
+/*		box-shadow: 0px 0px 30px 50px var(--bg-color);*/
+/*	}*/
+/*}*/

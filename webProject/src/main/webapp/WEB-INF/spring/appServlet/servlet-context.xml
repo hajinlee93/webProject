@@ -23,6 +23,9 @@
 	
 	<context:component-scan base-package="test.controller" />
 	<context:component-scan base-package="login.controller" />
+	<context:component-scan base-package="main.controller" />
+	<context:component-scan base-package="detail.controller" />
+	<context:component-scan base-package="mySnow.controller" />
 	
 	
 	

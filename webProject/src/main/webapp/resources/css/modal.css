@@ -1,0 +1,1395 @@
+@charset "UTF-8";
+.modal {
+    visibility: hidden;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-width: 100%;
+    height: 100%;
+    min-height: 100%;
+    background-color: rgba(0,0,0,.8);
+    transition: opacity .2s linear, visibility .2s linear;
+    z-index: 1000;
+    opacity: 0;
+    font-family: var(--font-family-defailt);
+    backdrop-filter: blur(2px);
+}
+
+.modal.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal .inner-modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -510px;
+    width: 1018px;
+}
+
+.modal .inner-modal .modal-close {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    width: 25px;
+    height: 25px;
+    background: url('/resources/img/overwatch/icon-close.png') no-repeat;
+    cursor: pointer;
+    background-size: contain;
+    filter: brightness(0.3);
+    z-index: 1;
+}
+
+.modal .inner-modal .modal-close span {
+    display: none;
+}
+
+#modal-apply-result .modal-close {
+    top: -60px;
+    right: -50px;
+}
+
+#modal-apply-result.modal-apply-won .modal-close {
+    top: 25px;
+    right: 50px;
+}
+
+.modal .inner-modal .modal-header {
+    padding: 18px 26px 18px 10px;
+    font-family: 'NotoSans Bold';
+    font-size: var(--font-size-medium);
+    background-color: white;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.modal .inner-modal .modal-header .icon-svg {
+    color: var(--snow-color);
+}
+
+.modal .inner-modal .modal-header span {
+    vertical-align: middle;
+}
+
+.modal .inner-modal .modal-content {
+    padding: 40px 26px;
+    text-align: center;
+    background-color: white;
+}
+
+.modal .inner-modal .modal-content .wide-centered-content {
+    padding: 20px 0;
+    text-align: center;
+    border-top: none;
+}
+
+.modal .inner-modal .modal-content .wide-centered-content .button {
+    margin-top: 35px;
+}
+
+.modal .inner-modal .modal-content .loading {
+    padding: 120px 0;
+}
+
+.modal .inner-modal .modal-content .loading.bounce-loading span.bounce {
+    width: 16px;
+    height: 16px;
+    background-color: #aaa;
+}
+
+.modal .inner-modal .modal-extra-text {
+    padding: 20px 30px;
+    text-align: left;
+    margin-top: 30px;
+    background: url('/static/images/overwatch/bg-reward-top.svg');
+}
+
+.modal .inner-modal .modal-extra-text h4 {
+    margin-bottom: 5px;
+    font-size: var(--font-size-medium);
+    color: var(--point-color-2);
+    font-family: var(--font-family-defailt);
+    font-weight: normal;
+}
+
+.modal .inner-modal .modal-extra-text ul, .modal .inner-modal .modal-extra-text ol {
+    padding-left: 20px;
+    color: var(--point-color-3);
+    line-height: 1.6;
+    font-family: var(--font-family-defailt);
+}
+
+.modal .inner-modal .modal-extra-text ul li {
+    list-style: disc;
+}
+
+.modal .inner-modal .modal-extra-text ol li {
+    list-style: decimal;
+}
+
+.modal .inner-modal .modal-extra-text ol li a, .modal .inner-modal .modal-extra-text ul li a {
+    color: var(--snow-color);
+}
+
+.modal.absolute, .modal.absolute .inner-modal {
+    position: absolute;
+}
+
+.modal.small .inner-modal {
+    margin-left: -350px;
+    width: 750px;
+    max-width: 100%;
+}
+
+.modal.small .inner-modal .modal-header {
+    text-align: center;
+    background-color: white;
+    border-bottom: 1px solid gainsboro;
+    ; }
+
+.modal.small .inner-modal .modal-content {
+    padding: 50px 20px;
+    border-radius: 0px 0px var(--border-radius) var(--border-radius);
+}
+
+.modal.small .inner-modal .modal-extra-text {
+    padding: 20px 30px;
+    background-color: #fff;
+    font-size: 0.84rem;
+}
+
+.modal.small .inner-modal .modal-extra-text h4 {
+    font-size: 1rem;
+}
+
+.modal.small .inner-modal .modal-extra-text ol {
+    line-height: 1.4;
+}
+
+.modal.mini .inner-modal {
+    margin-left: -238px;
+    width: 476px;
+}
+
+.modal.mini .inner-modal .modal-content .wide-centered-content {
+    padding: 0;
+}
+
+.modal.mini .inner-modal .modal-content .wide-centered-content .title i {
+    font-size: 4rem;
+    margin-top: 15px;
+}
+
+.modal.mini .inner-modal .modal-content .wide-centered-content .title i.fa-check-circle:before {
+    content: "";
+    display: block;
+    height: 40px;
+    background: url('/static/images/icons/icon-check.png') center no-repeat;
+    background-size: contain;
+}
+
+.modal.mini .inner-modal .modal-content .wide-centered-content .sub-title {
+    color: #686868;
+}
+
+.modal.mini .inner-modal .modal-content .wide-centered-content .sub-title .desc {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.84rem;
+}
+
+.modal.mini .inner-modal .modal-content .wide-centered-content .sub-title .award {
+    display: block;
+    margin-top: 5px;
+    font-size: 1.25rem;
+    font-family: "NotoSans Bold";
+    color: var(--snow-color);
+}
+
+/* Modal Style */
+#modal-apply-result.modal-apply-won, #modal-apply-result.modal-apply-lost {
+    background-color: #000000ab;
+}
+
+#modal-apply-result.modal-apply-won .inner-modal, #modal-apply-result.modal-apply-lost .inner-modal {
+    width: 1200px;
+    max-width: 70%;
+    height: 600px;
+    box-sizing: border-box;
+    padding: 70px;
+    border-radius: 20px;
+}
+
+#modal-apply-result.modal-apply-won .inner-modal {
+    background: url("/static/images/overwatch/bg-apply-won.png") center no-repeat;
+    background-size: cover;
+}
+
+#modal-apply-result.modal-apply-lost .inner-modal {
+    background: url("/static/images/overwatch/bg-apply-lost.png") center no-repeat;
+    background-size: cover;
+}
+
+#modal-apply-result .modal-close {
+    top: 35px;
+    right: 60px;
+    filter: brightness(1);
+}
+
+#modal-apply-confirm.modal .button-close {
+    background-color: var(--button-color-2);
+}
+
+#modal-apply-result.modal .button-close {
+    background-color: var(--button-color-2);
+}
+
+#modal-apply-result .modal-header, #modal-apply-result .modal-content {
+    background: transparent !important;
+}
+
+#modal-apply-result .modal-header {
+    font-family: var(--font-family-second);
+    color: white;
+    font-size: 58px;
+    letter-spacing: -2px;
+}
+
+#modal-apply-result .apply-modal-content {
+    color: white;
+    font-size: 18px;
+    text-align: left;
+    padding: 0px;
+    margin-top: -20px;
+}
+
+#modal-apply-result .apply-modal-content .apply-digital-desc {
+    color: white;
+    display: block;
+    font-family: 'NotoSans Bold';
+    font-size: 20px;
+    margin: 10px 0px;
+}
+
+#modal-apply-result .apply-modal-content .apply-digital-desc a {
+    color: var(--point-color);
+    font-weight: bold;
+}
+
+#modal-apply-result .apply-modal-content .title {
+    font-size: var(--font-size-xxlarge);
+    font-family: var(--font-family-primary);
+    font-weight: 100;
+    font-style: italic;
+}
+
+#modal-apply-result .apply-modal-content .subtitle {
+    margin: 30px 0px 20px 0px;
+    font-size: 22px;
+}
+
+#modal-apply-result .apply-modal-content .description {
+    margin-bottom: 40px;
+    display: block;
+    line-height: 30px;
+    font-size: var(--font-size-medium);
+    font-family: var(--font-family-defailt);
+    letter-spacing: -0.5px;
+}
+
+#modal-apply-result .apply-modal-content .button-desc {
+    color: var(--desc-color);
+    margin-top: 10px;
+    display: block;
+    font-family: var(--font-family-defailt);
+    font-size: 16px;
+}
+
+#modal-apply-lost .apply-modal-content {
+    padding-left: 420px;
+}
+
+#modal-notice .inner-modal {
+    padding: 70px 60px;
+    background: url("/static/images/overwatch/bg-modal-notice.png") center no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+#modal-notice .inner-modal .modal-header {
+    padding: 0px;
+    background: none;
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-xxlarge);
+    color: white;
+}
+
+#modal-notice .inner-modal .modal-close {
+    right: 35px;
+    top: 30px;
+    filter: brightness(1);
+}
+
+#modal-notice .inner-modal .modal-content {
+    text-align: left;
+    padding: 45px 35px;
+    background: none;
+}
+
+#modal-notice .inner-modal .modal-content .modal-notice-contents {
+    color: white;
+    text-align: left;
+}
+
+#modal-notice .inner-modal .modal-content .modal-notice-contents .content-title {
+    position: relative;
+    font-size: var(--font-size-large);
+}
+
+#modal-notice .inner-modal .modal-content .modal-notice-contents .content-desc {
+    color: white;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    font-size: var(--font-size-medium);
+}
+
+#modal-notice .inner-modal .modal-content .modal-notice-contents .modal-content-igr .content-title {
+    color: var(--snow-igr-color);
+}
+
+#modal-notice .inner-modal .modal-content .modal-notice-contents .modal-content-igr .content-title:before {
+    content: '';
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    top: 8px;
+    left: -30px;
+    background: url('/static/images/icons/icon-snow-igr.png') center no-repeat;
+    background-size: contain
+}
+
+#modal-notice .inner-modal .modal-content .modal-notice-contents .modal-content-igr .content-desc span {
+    color: var(--snow-igr-color);
+}
+
+#modal-notice .inner-modal .modal-content .modal-notice-contents .modal-content-normal .content-title {
+    color: #53c0e8;
+}
+
+#modal-notice .inner-modal .modal-content .modal-notice-contents .modal-content-normal .content-title:before {
+    content: '';
+    width: 23px;
+    height: 23px;
+    position: absolute;
+    top: 7px;
+    left: -30px;
+    background: url('/static/images/icons/icon-snow-normal.png') center no-repeat;
+    background-size: contain
+}
+
+#modal-notice .inner-modal .modal-content .modal-notice-contents .modal-content-normal .content-desc span {
+    color: #53c0e8;
+}
+
+#modal-notice .inner-modal .modal-content .modal-notice-contents .description {
+    margin-top: 60px;
+    margin-bottom: 40px;
+    opacity: 0.7;
+}
+
+#modal-notice .button-close {
+    background-color: var(--point-color);
+}
+
+#modal-notice .modal-content-checkbox {
+    margin-top: 25px;
+}
+
+#modal-notice .modal-content-checkbox input {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+#modal-notice .modal-content-checkbox label {
+    cursor: pointer;
+    color: white;
+    vertical-align: middle;
+    opacity: 0.7;
+}
+
+#won-physical-modal {
+}
+
+#coupon-claim .modal-content {
+    border-radius: 0px 0px var(--border-radius) var(--border-radius);
+}
+
+#postal-code .modal-header {
+    padding-left: 30px;
+}
+
+.postal-code-module {
+    font-size: 1rem;
+    color: #8a8a8a;
+}
+
+.postal-code-module .search-type-tab {
+    margin-bottom: 40px;
+}
+
+.postal-code-module .search-type-tab ul {
+    width: 100%;
+    overflow: hidden;
+}
+
+.postal-code-module .search-type-tab ul li {
+    position: relative;
+    float: left;
+    width: 33.3333%;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+.postal-code-module .search-type-tab ul li a {
+    display: block;
+    line-height: 42px;
+    color: black;
+    text-align: center;
+}
+
+.postal-code-module .search-type-tab ul li.is-active {
+    background-color: var(--point-color);
+    border: 1px solid var(--point-color);
+}
+
+.postal-code-module .search-type-tab ul li.is-active a {
+    color: #fff;
+    border: none;
+}
+
+.postal-code-module .search-address-form {
+    padding: 20px 15px;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+.postal-code-module .search-address-form form {
+    position: relative;
+    display: block;
+    padding: 0 97px 0 185px;
+}
+
+.postal-code-module .search-address-form form select {
+    position: absolute;
+    left: 0;
+    top: 0;
+    min-width: 180px;
+    height: 47px;
+    font-size: 1em;
+    font-family: var(--font-family-defailt);
+    color: black;
+    vertical-align: middle;
+    padding-left: 10px;
+}
+
+.postal-code-module .search-address-form form .search-input {
+    position: relative;
+    height: 47px;
+    padding: 0 45px 0 10px;
+    border: 1px solid #cecece;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.postal-code-module .search-address-form form .search-input .input {
+    display: none;
+}
+
+.postal-code-module .search-address-form form .search-input .input input {
+    width: 100%;
+    height: 44px;
+    border: none;
+    background-color: #fff;
+    font-family: var(--font-family-defailt);
+    line-height: 45px;
+    font-size: 1em;
+}
+
+.postal-code-module .search-address-form form .search-input .input input::-ms-clear {
+    width: 0;
+    height: 0;
+}
+
+.postal-code-module .search-address-form form .search-input .input.is-active {
+    display: inline;
+    vertical-align: middle;
+}
+
+.postal-code-module .search-address-form form .search-input .clear {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 45px;
+    height: 45px;
+    background: #fff url('/static/images/button/button-clear.png') center center no-repeat;
+    border: none;
+    cursor: pointer;
+}
+
+.postal-code-module .search-address-form form .submit-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 92px;
+    height: 47px;
+    padding: 5px 0;
+    background-color: var(--point-color);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: background-color .2s ease;
+}
+
+.postal-code-module .search-address-form form .submit-button:hover {
+    background-color: var(--point-color);
+}
+
+.postal-code-module .search-address-form .search-guide {
+    margin-top: 20px;
+    padding: 0 5px;
+    text-align: left;
+    font-family: var(--font-family-defailt);
+    color: var(--bg-black-70);
+}
+
+.postal-code-module .search-address-form .search-guide h3 {
+    margin-bottom: 5px;
+    font-size: 0.84em;
+}
+
+.postal-code-module .search-address-form .search-guide .examples {
+    display: none;
+}
+
+.postal-code-module .search-address-form .search-guide .examples.is-active {
+    display: block;
+}
+
+.postal-code-module .search-address-form .search-guide .examples .warning {
+    color: #b80919;
+    padding-top: 5px;
+    font-weight: normal;
+}
+
+.postal-code-module .search-address-result {
+    height: 340px;
+    margin-top: 20px;
+    text-align: left;
+    overflow: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    font-family: var(--font-family-defailt);
+}
+
+.postal-code-module .search-address-result .searching {
+    padding: 25px 0 45px;
+    text-align: center;
+}
+
+.postal-code-module .search-address-result .searching:before {
+    content: "\f110";
+    display: block;
+    width: 100px;
+    margin: 0 auto;
+    font-family: "FontAwesome";
+    font-size: 3.125rem;
+    -webkit-animation: fa-spin 2s infinite linear;
+    animation: fa-spin 2s infinite linear;
+}
+
+.postal-code-module .search-address-result .searching strong {
+    font-size: 1.25rem;
+}
+
+.postal-code-module .search-address-result .info {
+    padding: 25px 0 45px;
+    text-align: center;
+}
+
+.postal-code-module .search-address-result .info:before {
+    content: "\f071";
+    display: block;
+    font-family: "FontAwesome";
+    font-size: 3.125rem;
+}
+
+.postal-code-module .search-address-result .info strong {
+    font-size: 1.25rem;
+    word-break: break-all;
+}
+
+.postal-code-module .search-address-result h3 {
+    margin-bottom: 10px;
+    font-size: 1em;
+    font-weight: normal;
+    word-break: break-all;
+}
+
+.postal-code-module .search-address-result h3 .count {
+    color: black;
+    font-weight: bold;
+}
+
+.postal-code-module .search-address-result h3 strong {
+    color: black;
+}
+
+.postal-code-module .search-address-result ul {
+    border-top: 2px solid var(--bg-black-30);
+    border-bottom: 2px solid var(--bg-black-30);
+}
+
+.postal-code-module .search-address-result ul li {
+    position: relative;
+    margin-top: -1px;
+    padding: 15px 0 15px 170px;
+    border-top: 2px solid var(--bg-black-30);
+    cursor: pointer;
+}
+
+.postal-code-module .search-address-result ul li:hover {
+    background-color: var(--bg-color);
+}
+
+.postal-code-module .search-address-result ul li .zipcode {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    width: 156px;
+    margin-top: -11px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.postal-code-module .search-address-result ul li .address .jibun {
+    color: #626262;
+}
+
+.postal-code-module .search-address-result ul li .address .jibun span {
+    display: inline-block;
+    margin-bottom: 2px;
+    padding: 0 6px;
+    border: 1px solid gray;
+    border-radius: 3px;
+    font-size: 0.8125rem;
+    vertical-align: middle;
+}
+
+.field-postalcode > dd > div:first-child {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 640px) {
+    .modal {
+        visibility: hidden;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        transition: opacity .2s linear, visibility .2s linear;
+        z-index: 1000;
+        opacity: 0;
+    }
+
+    .modal.visible {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .modal.responsive {
+        height: 100%;
+        padding: 0px;
+        background-color: white;
+    }
+
+    .modal .inner-modal {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+        padding-top: 40px;
+    }
+
+    .modal .inner-modal .modal-close {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        background: url('/static/images/overwatch/icon-close.png') center no-repeat;
+        background-size: 40%;
+        cursor: pointer;
+        z-index: 3;
+        filter: brightness(1);
+    }
+
+    .modal .inner-modal .modal-close span {
+        display: none;
+    }
+
+    .modal .inner-modal .modal-header {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        padding: 5px 18px;
+        background-color: var(--point-color);
+        font-family: var(--font-family-primary);
+        font-style: italic;
+        font-size: var(--font-size-large);
+        line-height: 30px;
+        z-index: 2;
+        color: #fff;
+        border-radius: 0px;
+    }
+
+    .modal .inner-modal .modal-header .icon-svg {
+        display: none;
+        color: var(--subtitle-color);
+    }
+
+    .modal .inner-modal .modal-content {
+        position: relative;
+        padding: 25px;
+        text-align: center;
+    }
+
+    .modal .inner-modal .modal-content .wide-centered-content {
+        padding: 20px 0;
+        text-align: center;
+        border-top: none;
+    }
+
+    .modal .inner-modal .modal-content .loading {
+        padding: 60px 0;
+    }
+
+    .modal .inner-modal .modal-content .loading.bounce-loading span.bounce {
+        width: 8px;
+        height: 8px;
+        background-color: #aaa;
+    }
+
+    .modal .inner-modal .modal-extra-text {
+        margin-top: 35px;
+        text-align: left;
+        border-top: 1px solid var(--bg-black-20);
+        background: none;
+    }
+
+    .modal .inner-modal .modal-extra-text h4 {
+        margin-bottom: 5px;
+        font-size: var(--font-size-medium);
+        color: var(--bg-black-70);
+        font-family: var(--font-family-defailt);
+        font-weight: normal;
+    }
+
+    .modal .inner-modal .modal-extra-text ul, .modal .inner-modal .modal-extra-text ol {
+        padding-left: 20px;
+        color: var(--desc-color);
+        line-height: 1.8;
+    }
+
+    .modal .inner-modal .modal-extra-text ul li {
+        list-style: disc;
+    }
+
+    .modal .inner-modal .modal-extra-text ol li {
+        list-style: decimal;
+    }
+
+    .modal .inner-modal .modal-extra-text ol li a, .modal .inner-modal .modal-extra-text ul li a {
+        color: var(--subtitle-color);
+    }
+
+    #modal-apply-lost.modal.responsive {
+        background: linear-gradient( rgba(183,145,208,1) 40%, rgba(40,14,33,1) 100%);
+    }
+
+    .modal.dialog {
+        position: fixed;
+    }
+
+    .modal.dialog .inner-modal {
+        position: fixed;
+        left: 50%;
+        border-radius: 6px;
+        box-shadow: 0px 0px 5px rgba(0,0,0,.8);
+    }
+
+    .modal.small .inner-modal {
+        width: 100%;
+        position: relative;
+        left: 0;
+        top: 0;
+        margin: 0;
+    }
+
+    .modal.small .inner-modal .modal-header {
+        background-color: var(--point-color);
+    }
+
+    .modal.small .inner-modal .modal-content .wide-centered-content .title strong {
+        font-size: var(--font-size-large);
+        color: var(--point-color-3);
+    }
+
+    .modal.small .inner-modal .modal-content .wide-centered-content .sub-title {
+        font-size: 14px;
+    }
+
+    .modal.small .inner-modal .modal-extra-text {
+        padding: 20px 30px;
+        background-color: #fff;
+        font-size: 0.875rem;
+    }
+
+    .modal.small .inner-modal .modal-extra-text h4 {
+        font-size: 1rem;
+    }
+
+    .modal.small .inner-modal .modal-extra-text ol {
+        line-height: 1.4;
+    }
+
+    .modal.mini .inner-modal {
+        width: 86%;
+        margin-left: -43%;
+    }
+
+    .modal.mini .inner-modal .modal-content .wide-centered-content {
+        padding: 0;
+    }
+
+    .modal.mini .inner-modal .modal-content .wide-centered-content .title i {
+        display: block;
+        font-size: 2.167rem;
+        margin: 0px 0px 15px 0px;
+    }
+
+    .modal.mini .inner-modal .modal-content .wide-centered-content .title i.fa-check-circle:before {
+        content: "";
+        display: block;
+        height: 40px;
+        background: url('/static/images/icons/icon-check.png') center no-repeat;
+        background-size: contain;
+    }
+
+    .modal.mini .inner-modal .modal-content .wide-centered-content .sub-title {
+        color: #686868;
+    }
+
+    .modal.mini .inner-modal .modal-content .wide-centered-content .sub-title {
+        color: #686868;
+    }
+
+    .modal.mini .inner-modal .modal-content .wide-centered-content .sub-title .desc {
+        display: block;
+        margin-top: 5px;
+        font-size: 0.875rem;
+    }
+
+    .modal.mini .inner-modal .modal-content .wide-centered-content .sub-title .award {
+        display: block;
+        margin-top: 5px;
+        font-size: 1.25rem;
+        font-family: "NotoSans Bold";
+        color: var(--subtitle-color);
+    }
+
+    #insert-successed.modal .inner-modal {
+        padding: 0px;
+    }
+
+    #insert-successed.modal .inner-modal .modal-content {
+        padding: 35px;
+    }
+
+    #modal-notice, #modal-apply-result {
+        background-color: #2a2a2a;
+        padding: 30px 15px;
+        box-sizing: border-box;
+    }
+
+    #modal-notice .inner-modal {
+        position: relative;
+        left: 0;
+        top: 0;
+        padding: 35px 25px;
+        background: url("/static/images/overwatch/m/bg-modal-notice.png") top right no-repeat;
+        background-size: cover;
+        border-radius: 10px;
+        box-sizing: border-box;
+    }
+
+    #modal-notice .inner-modal .modal-header {
+        position: relative;
+        padding: 0px;
+        background: none;
+        font-family: var(--font-family-primary);
+        font-size: var(--font-size-xlarge);
+        color: white;
+    }
+
+    #modal-notice .inner-modal .modal-close {
+        right: 35px;
+        top: 30px;
+        filter: brightness(1);
+    }
+
+    #modal-notice .inner-modal .modal-content {
+        text-align: left;
+        padding: 30px;
+        text-shadow: var(--text-desc-shadow);
+        background: none;
+    }
+
+    #modal-notice .inner-modal .modal-content .modal-notice-contents {
+        color: white;
+        text-align: left;
+    }
+
+    #modal-notice .inner-modal .modal-content .modal-notice-contents .content-title {
+        position: relative;
+        font-size: var(--font-size-medium);
+    }
+
+    #modal-notice .inner-modal .modal-content .modal-notice-contents .content-desc {
+        color: white;
+        margin-top: 5px;
+        margin-bottom: 20px;
+        font-size: var(--font-size-medium);
+    }
+
+    #modal-notice .inner-modal .modal-content .modal-notice-contents .modal-content-igr .content-title {
+        color: var(--snow-igr-color);
+    }
+
+    #modal-notice .inner-modal .modal-content .modal-notice-contents .modal-content-igr .content-title:before {
+        content: '';
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        top: 4px;
+        left: -25px;
+        background: url('/static/images/icons/icon-snow-igr.png') center no-repeat;
+        background-size: contain
+    }
+
+    #modal-notice .inner-modal .modal-content .modal-notice-contents .modal-content-igr .content-desc span {
+        color: var(--snow-igr-color);
+    }
+
+    #modal-notice .inner-modal .modal-content .modal-notice-contents .modal-content-normal .content-title {
+        color: #53c0e8;
+    }
+
+    #modal-notice .inner-modal .modal-content .modal-notice-contents .modal-content-normal .content-title:before {
+        content: '';
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        top: 4px;
+        left: -25px;
+        background: url('/static/images/icons/icon-snow-normal.png') center no-repeat;
+        background-size: contain
+    }
+
+    #modal-notice .inner-modal .modal-content .modal-notice-contents .modal-content-normal .content-desc span {
+        color: #53c0e8;
+    }
+
+    #modal-notice .inner-modal .modal-content .modal-notice-contents .description {
+        margin-top: 25px;
+        margin-bottom: 30px;
+        font-size: var(--font-size-small);
+        opacity: 0.7;
+    }
+
+    #modal-notice .button-close {
+        background-color: var(--point-color);
+        font-size: var(--font-size-large);
+        height: 50px;
+        width: 200px;
+    }
+
+    #modal-notice .modal-content-checkbox {
+        margin-top: 25px;
+    }
+
+    #modal-notice .modal-content-checkbox input {
+        width: 18px;
+        height: 18px;
+        vertical-align: middle;
+    }
+
+    #modal-notice .modal-content-checkbox label {
+        cursor: pointer;
+        color: white;
+        vertical-align: middle;
+        opacity: 0.7;
+    }
+
+    #modal-apply-confirm-result {
+        height: 100%;
+        position: absolute;
+    }
+
+    #modal-apply-result {
+        background-color: #2a2a2a;
+    }
+
+    #modal-apply-result .inner-modal {
+        height: auto;
+        border-radius: 10px;
+        box-sizing: border-box;
+    }
+
+    #modal-apply-result .modal-content {
+        padding: 0px;
+    }
+
+    #modal-apply-result .modal-close {
+        top: 5px;
+        right: 10px;
+    }
+
+    #modal-apply-result .apply-modal-content {
+        padding: 60px 20px;
+    }
+
+    #modal-apply-result .apply-modal-content .title {
+        font-family: var(--font-family-primary);
+        font-size: var(--font-size-xlarge);
+        color: white;
+        font-weight: 100;
+        margin-bottom: 30px;
+    }
+
+    #modal-apply-result .apply-modal-content .subtitle {
+        width: 100%;
+        margin: auto;
+        font-size: var(--font-size-medium);
+        font-family: var(--font-family-defailt);
+        word-break: keep-all;
+        word-wrap: break-word;
+    }
+
+    #modal-apply-result .apply-modal-content .subtitle a {
+        color: #fff;
+    }
+
+    #modal-apply-result .apply-modal-content .description {
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 40px;
+        line-height: 24px;
+        opacity: 0.9;
+    }
+
+    #modal-apply-result .apply-modal-content .button-desc {
+        color: var(--desc-color);
+        margin-top: 10px;
+        display: block;
+        font-family: var(--font-family-defailt);
+    }
+
+    #modal-apply-result .apply-modal-content .item-button {
+        display: flex;
+        margin: 0px;
+        padding: 0px;
+        width: 60%;
+        max-width: 200px;
+        margin-bottom: 10px;
+    }
+
+    #modal-apply-result.modal-apply-won .inner-modal, #modal-apply-result.modal-apply-lost .inner-modal {
+        height: auto;
+        max-width: 100%;
+        padding: 10px 10px;
+    }
+
+    #modal-apply-result.modal-apply-won .inner-modal {
+        background: url("/static/images/overwatch/m/bg-apply-won.png") center no-repeat;
+        background-size: cover;
+    }
+
+    #modal-apply-result.modal-apply-lost .inner-modal {
+        background: url("/static/images/overwatch/m/bg-apply-lost.png") center no-repeat;
+        background-size: cover;
+    }
+
+    .field-postalcode > dd > div:first-child {
+        margin: 0px;
+    }
+
+    .postal-code-module {
+        font-size: 1rem;
+        color: black;
+    }
+
+    .postal-code-module .search-type-tab ul {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .postal-code-module .search-type-tab ul li {
+        position: relative;
+        float: left;
+        width: 33.3333%;
+        border: 1px solid #ffd3d3;
+        border-bottom: 1px solid #ffd3d3;
+        border-left: none;
+        background-color: #fbf1f1;
+        box-sizing: border-box;
+    }
+
+    .postal-code-module .search-type-tab ul li:first-child {
+        border-left: 1px solid #ffd3d3;
+    }
+
+    .postal-code-module .search-type-tab ul li a {
+        display: block;
+        line-height: 26px;
+        color: #999;
+        text-align: center;
+    }
+
+    .postal-code-module .search-type-tab ul li.is-active {
+        background-color: var(--point-color);
+        border: 1px solid var(--point-color);
+    }
+
+    .postal-code-module .search-type-tab ul li.is-active:before {
+        content: "";
+        position: absolute;
+        left: -1px;
+        top: 0;
+        width: 1px;
+        height: 27px;
+        background-color: #ffd3d3;
+    }
+
+    .postal-code-module .search-type-tab ul li.is-active:after {
+        content: "";
+        position: absolute;
+        right: -1px;
+        top: 0;
+        width: 1px;
+        height: 27px;
+        background-color: #ffd3d3;
+    }
+
+    .postal-code-module .search-type-tab ul li.is-active a {
+        color: #fff;
+        border: none;
+    }
+
+    .postal-code-module .search-address-form {
+        text-align: center;
+        background-color: #f1f1f1;
+    }
+
+    .postal-code-module .search-address-form form {
+        position: relative;
+        display: block;
+        padding: 0 50px 0 90px;
+    }
+
+    .postal-code-module .search-address-form form select {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 86px;
+        height: 28px;
+        font-size: 0.9231rem;
+        font-family: var(--font-family-defailt);
+        color: #000;
+        vertical-align: middle;
+    }
+
+    .postal-code-module .search-address-form form .search-input {
+        position: relative;
+        height: 28px;
+        padding: 0 23px 0 5px;
+        box-sizing: border-box;
+    }
+
+    .postal-code-module .search-address-form form .search-input .input {
+        display: none;
+    }
+
+    .postal-code-module .search-address-form form .search-input .input input {
+        width: 100%;
+        height: 26px;
+        border: none;
+        background-color: #fff;
+        font-family: var(--font-family-defailt);
+        line-height: 23px;
+        font-size: 1em;
+    }
+
+    .postal-code-module .search-address-form form .search-input .input input::-webkit-input-placeholder {
+        font-size: 0.9231rem;
+    }
+
+    .postal-code-module .search-address-form form .search-input .input.is-active {
+        display: inline;
+        vertical-align: middle;
+    }
+
+    .postal-code-module .search-address-form form .search-input .clear {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 26px;
+        height: 26px;
+        background: #fff url('/static/images/button/button-clear.png') center center no-repeat;
+        background-size: 50%;
+        border: none;
+        cursor: pointer;
+    }
+
+    .postal-code-module .search-address-form form .submit-button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 46px;
+        height: 28px;
+        padding: 0px;
+        background-color: var(--point-color);
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        vertical-align: middle;
+        line-height: 28px;
+        font-size: 0.9rem;
+    }
+
+    .postal-code-module .search-address-form .search-guide {
+        margin-top: 10px;
+        padding: 0 5px;
+        text-align: left;
+        color: #000;
+    }
+
+    .postal-code-module .search-address-form .search-guide h3 {
+        font-size: 0.875em;
+    }
+
+    .postal-code-module .search-address-form .search-guide .examples {
+        display: none;
+    }
+
+    .postal-code-module .search-address-form .search-guide .examples.is-active {
+        display: block;
+        font-size: 0.82rem;
+    }
+
+    .postal-code-module .search-address-form .search-guide .examples .warning {
+        color: #b80919;
+        font-weight: normal;
+    }
+
+    .postal-code-module .search-address-result {
+        text-align: left;
+    }
+
+    .postal-code-module .search-address-result .searching {
+        padding: 25px 0 45px;
+        text-align: center;
+    }
+
+    .postal-code-module .search-address-result .searching:before {
+        content: "\f110";
+        display: block;
+        width: 100px;
+        margin: 0 auto;
+        font-family: "FontAwesome";
+        font-size: 2.167rem;
+        -webkit-animation: fa-spin 2s infinite linear;
+        animation: fa-spin 2s infinite linear;
+    }
+
+    .postal-code-module .search-address-result .searching strong {
+        font-size: 1.25rem;
+    }
+
+    .postal-code-module .search-address-result .info {
+        padding: 15px 0 25px;
+        text-align: center;
+    }
+
+    .postal-code-module .search-address-result .info:before {
+        content: "\f071";
+        display: block;
+        font-family: "FontAwesome";
+        font-size: 2.167rem;
+    }
+
+    .postal-code-module .search-address-result .info strong {
+        font-size: 1.25rem;
+        word-break: break-all;
+    }
+
+    .postal-code-module .search-address-result h3 {
+        margin-bottom: 5px;
+        font-size: 1em;
+        font-weight: normal;
+        word-break: break-all;
+    }
+
+    .postal-code-module .search-address-result ul li {
+        position: relative;
+        padding: 8px 0 8px 20%;
+    }
+
+    .postal-code-module .search-address-result ul li .zipcode {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 20%;
+        margin-top: -9px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .postal-code-module .search-address-result ul li .address {
+        word-break: break-all;
+    }
+
+    .postal-code-module .search-address-result ul li .address .jibun {
+        font-size: 0.8462rem;
+    }
+
+    .postal-code-module .search-address-result ul li .address .jibun span {
+        display: inline-block;
+        margin-bottom: 2px;
+        padding: 0 3px;
+        border: 1px solid #d2d2d2;
+        border-radius: 3px;
+        font-size: 0.7692rem;
+        line-height: 12px;
+        vertical-align: middle;
+    }
+}
